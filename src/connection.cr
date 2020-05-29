@@ -7,7 +7,6 @@ require "./pool"
 # may also be manually checkout and checkin.
 class ConnectionPool(T) < Pool(T)
   # TODO: reap connection of dead coroutines that didn't checkin (or died before)
-  # FIXME: thread safety
 
   # Returns true if a connection was checkout for the current coroutine.
   def active?
