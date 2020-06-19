@@ -76,8 +76,9 @@ class Pool(T)
   # in when the block exits.
   def use(&block)
     item = checkout
-    yield item
-    checkin item
+    result = yield item
+    checkin(item)
+    result
   end
 
   private def start_one
