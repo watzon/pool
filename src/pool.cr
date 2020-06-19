@@ -72,6 +72,14 @@ class Pool(T)
     end
   end
 
+  # Checkout an item and pass it to the block, then check it back
+  # in when the block exits.
+  def use(&block)
+    item = checkout
+    yield item
+    checkin item
+  end
+
   private def start_one
     @mutex.synchronize do
       @size += 1
