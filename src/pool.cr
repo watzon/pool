@@ -81,6 +81,12 @@ class Pool(T)
     result
   end
 
+  # Delete a connection from the pool (good if something dies)
+  def delete(connection : T)
+    checkin(connection)
+    pool.delete(connection)
+  end
+
   private def start_one
     @mutex.synchronize do
       @size += 1
